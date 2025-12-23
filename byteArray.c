@@ -11,7 +11,6 @@ struct ByteArrayStruct{
 };
 
 ByteArray ByteArray_new(size_t len){
-
     ByteArray newByteArr; 
     newByteArr = (ByteArray) malloc(sizeof(struct ByteArrayStruct));
     if(newByteArr == NULL)
@@ -33,9 +32,22 @@ void ByteArray_free(ByteArray byteArr){
     free(byteArr);
 }
 
-void ByteArray_setByte(ByteArray byteArr, size_t index, char value){
+size_t ByteArray_len(ByteArray byteArr){
     assert(byteArr!=NULL);
+    return byteArr->arrLen;
+}
+
+void ByteArray_setByte(ByteArray byteArr, size_t index, char value){
+    assert(byteArr!=NULL); assert(byteArr->charArr!=NULL);
     assert(index < byteArr->arrLen);
 
     byteArr->charArr[index] = value;
 }
+
+char ByteArray_getByte(ByteArray byteArr, size_t index){
+    assert(byteArr!=NULL); assert(byteArr->charArr!=NULL);
+    assert(index < byteArr->arrLen);
+
+    return byteArr->charArr[index];
+}
+

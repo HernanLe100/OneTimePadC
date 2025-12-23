@@ -12,10 +12,16 @@ typedef struct ByteArrayStruct * ByteArray;
 ByteArray. Returns NULL if insufficient memory. */
 ByteArray ByteArray_new(size_t len);
 
-/* Frees memory allocated to byteArr */
+/* Frees memory allocated to byteArr. */
 void ByteArray_free(ByteArray byteArr);
 
-/* Sets index-th byte of byteArr to value */
+/* Return the length of byteArr. */
+size_t ByteArray_len(ByteArray byteArr);
+
+/* Sets index-th byte of byteArr to value. */
 void ByteArray_setByte(ByteArray byteArr, size_t index, char value);
+
+/* Gets index-th byte of byteArr */
+char ByteArray_getByte(ByteArray byteArr, size_t index);
 
 #endif
