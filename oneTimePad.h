@@ -6,6 +6,9 @@
 #include "byteArray.h"
 #include <stddef.h> 
 
+/* Sets up the  */
+void OTP_setup();
+
 /* Generates a random key of keyLen bytes and return as a ByteArray.
 Return NULL if memory allocation failed. */
 ByteArray OTP_generateKey(size_t keyLen);
