@@ -6,17 +6,18 @@
 int main(void){
 
     ByteArray key;
+    ByteArray msg;
     OTP_setup();
 
     key = OTP_generateKey(100);
     OTP_print(key);
-    printf("\n");
+    printf("\n\n");
     ByteArray_free(key);
 
-    key = OTP_stringToByteArray("Hello World");
-    OTP_print(key);
-    ByteArray_free(key);
-    printf("\n");
+    msg = OTP_stringToByteArray("Hello World");
+    OTP_print(msg);
+    ByteArray_free(msg);
+    printf("\n\n");
 
     return 0;
 }

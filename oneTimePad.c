@@ -53,7 +53,29 @@ ByteArray OTP_stringToByteArray(const char *str){
 }
 
 ByteArray OTP_applyKey(ByteArray msg, ByteArray key){
-    return NULL;
+    size_t index;
+    size_t msgLength;
+    size_t keyLength;
+
+    ByteArray result;
+
+    assert(msg != NULL); assert(key != NULL);
+    msgLength = ByteArray_len(msg);
+    keyLength = ByteArray_len(key);
+
+    result = ByteArray_new(msgLength);
+    if(result == NULL)
+        return NULL;
+
+    for(index = 0; index < msgLength; index++){
+        if(index < keyLength)
+            ByteArray_setByte(result, index, 
+            ByteArray_getByte(msg, index) ^ ByteArray_getByte(key, index));
+        else
+            ByteArray_setByte(result, index, ByteArray_getByte(msg, index));
+    }
+
+    return result;
 }
 
 void OTP_print(ByteArray byteArr){
