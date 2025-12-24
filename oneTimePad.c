@@ -15,17 +15,17 @@ void OTP_setup(){
     systemReady = TRUE;
 }
 
-ByteArray OTP_generateKey(size_t keyLen){
+ByteArray OTP_generateKey(size_t keyLength){
     size_t index;
     ByteArray key;
 
     assert(systemReady);
 
-    key = ByteArray_new(keyLen);
+    key = ByteArray_new(keyLength);
     if(key == NULL) 
         return NULL;
 
-    for(index = 0; index < keyLen; index++){
+    for(index = 0; index < keyLength; index++){
         ByteArray_setByte(key, index, rand()%128 );
     }
     return key;

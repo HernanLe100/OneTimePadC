@@ -11,9 +11,9 @@
 - This function MUST be called BEFORE calling OTP_generateKey(). */
 void OTP_setup();
 
-/* Generates a random key of keyLen bytes and return as a ByteArray.
+/* Generates a random key of keyLength bytes and return as a ByteArray.
 Return NULL if memory allocation failed. */
-ByteArray OTP_generateKey(size_t keyLen);
+ByteArray OTP_generateKey(size_t keyLength);
 
 /* Returns a ByteArray representation of str. 
 Return NULL if memory allocation failed.*/
