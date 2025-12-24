@@ -9,7 +9,7 @@ enum{BUFFER_SIZE = 65536};
 
 /* Takes in name of input file from command line or standard input at 
 runtime and generates a one-time pass key to encrypt the input. 
-Creates/writes to files called "key" and "cipher". */
+Creates/writes to files "key" and "cipher". */
 int main(int argc, char *argv[]){
     ByteArray msg; 
     ByteArray key; 

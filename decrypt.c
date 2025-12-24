@@ -7,8 +7,9 @@
 /* If input is larger, input will be processed in chunks of 65536 */
 enum{BUFFER_SIZE = 65536}; 
 
-/* Takes in cipher and key file names as command line args and prints 
-decrypted message to standard output.  */
+/* Takes in cipher and key file names as command-line args and prints 
+decrypted message to standard output or a file specified as a third 
+command-line argument. */
 int main(int argc, char *argv[]){
     ByteArray cipher; 
     ByteArray key; 
@@ -16,6 +17,7 @@ int main(int argc, char *argv[]){
 
     FILE * cipherFile; 
     FILE * keyFile; 
+    FILE * outputStream;
 
     char cipherStr[BUFFER_SIZE];
     char keyStr[BUFFER_SIZE];
@@ -23,8 +25,14 @@ int main(int argc, char *argv[]){
     size_t index;
     int c = 0;
 
-    if (argc != 3){
-        fprintf(stderr, "Incorrect number of command-line arguments.");
+    if(argc == 3){
+        outputStream = stdout;
+    }
+    else if (argc == 4){
+        outputStream = fopen(argv[3], "w");
+    }
+    else{
+        fprintf(stderr, "Invalid number of command-line arguments.");
         fprintf(stderr, "\n");
         return 1;
     }
@@ -57,15 +65,19 @@ int main(int argc, char *argv[]){
         cipher = OTP_stringToByteArray(cipherStr, index);
         key = OTP_stringToByteArray(keyStr, index);
         msg = OTP_applyKey(cipher, key);
-        OTP_print(stdout, msg);
+        OTP_print(outputStream, msg);
 
         ByteArray_free(msg);
         ByteArray_free(key);
         ByteArray_free(cipher);
     }
 
+    if(outputStream == stdout)
+        printf("\n");
+
     fclose(cipherFile);
     fclose(keyFile);
+    fclose(outputStream);
 
     return 0;
 }
