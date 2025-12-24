@@ -3,7 +3,6 @@
 #include "oneTimePad.h"
 #include <stdlib.h>
 #include <assert.h>
-#include <stdio.h>
 #include <string.h>
 #include <time.h>
 
@@ -78,7 +77,7 @@ ByteArray OTP_applyKey(ByteArray msg, ByteArray key){
     return result;
 }
 
-void OTP_print(ByteArray byteArr){
+void OTP_print(FILE *outputStream, ByteArray byteArr){
     size_t index;
     size_t length;
 
@@ -87,7 +86,7 @@ void OTP_print(ByteArray byteArr){
     length = ByteArray_len(byteArr);
 
     for(index = 0; index < length; index++){
-        printf("%c", ByteArray_getByte(byteArr, index));
+        fprintf(outputStream, "%c", ByteArray_getByte(byteArr, index));
     }
 
 }

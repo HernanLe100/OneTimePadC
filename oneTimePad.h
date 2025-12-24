@@ -5,8 +5,9 @@
 
 #include "byteArray.h"
 #include <stddef.h> 
+#include <stdio.h>
 
-/* Sets up the  */
+/* Sets up the system to generate (pseudo) random numbers. */
 void OTP_setup();
 
 /* Generates a random key of keyLen bytes and return as a ByteArray.
@@ -23,8 +24,8 @@ Return NULL if memory allocation failed.
 but if key < msg, the first |key| bytes of msg are encrypted. */
 ByteArray OTP_applyKey(ByteArray msg, ByteArray key);
 
-/* prints the contents of byteArr to standard output. */
-void OTP_print(ByteArray byteArr); 
+/* Prints the contents of byteArr to outputStream. */
+void OTP_print(FILE * outputStream, ByteArray byteArr); 
 
 
 #endif
