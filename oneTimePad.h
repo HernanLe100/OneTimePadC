@@ -7,7 +7,8 @@
 #include <stddef.h> 
 #include <stdio.h>
 
-/* Sets up the system to generate (pseudo) random numbers. */
+/* Sets up the system to generate (pseudo) random numbers. 
+- This function MUST be called BEFORE calling OTP_generateKey(). */
 void OTP_setup();
 
 /* Generates a random key of keyLen bytes and return as a ByteArray.
@@ -21,7 +22,7 @@ ByteArray OTP_stringToByteArray(const char *str);
 /* XOR msg and key and returns result as ByteArray. 
 Return NULL if memory allocation failed. 
 - Ideally, key and msg are the same length, 
-but if key < msg, the first |key| bytes of msg are encrypted. */
+but if |key| < |msg|, the first |key| bytes of msg are encrypted. */
 ByteArray OTP_applyKey(ByteArray msg, ByteArray key);
 
 /* Prints the contents of byteArr to outputStream. */

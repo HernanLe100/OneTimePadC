@@ -7,7 +7,8 @@ int main(void){
 
     ByteArray key;
     ByteArray msg;
-    ByteArray result;
+    ByteArray result1;
+    ByteArray result2;
     OTP_setup();
 
     key = OTP_generateKey(100);
@@ -22,12 +23,17 @@ int main(void){
 
     key = OTP_generateKey(5);
     msg = OTP_stringToByteArray("Hello World");
-    result = OTP_applyKey(msg, key);
-    OTP_print(stdout, result);
+    result1 = OTP_applyKey(msg, key);
+    OTP_print(stdout, result1);
     printf("\n\n");
+    result2 = OTP_applyKey(result1, key);
+    OTP_print(stdout, result2);
+    printf("\n\n");
+
     ByteArray_free(key);
     ByteArray_free(msg);
-    ByteArray_free(result);
+    ByteArray_free(result1);
+    ByteArray_free(result2);
 
     return 0;
 }
