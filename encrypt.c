@@ -1,5 +1,7 @@
 /* encrypt.c - Hernan Le */
 
+/* ./encrypt [msgFile] keyFile cipherFile */
+
 #include "byteArray.h"
 #include "oneTimePad.h"
 #include <stdio.h>
@@ -7,33 +9,41 @@
 /* If input is larger, input will be processed in chunks of 65536 */
 enum{BUFFER_SIZE = 65536}; 
 
-/* Takes in name of input file from command line or standard input at 
+/* Takes in name of input file from command-line or standard input at 
 runtime and generates a one-time pass key to encrypt the input. 
-Creates/writes to files "key" and "cipher". */
+Creates/writes to key and cipher files specified by command-line args. */
 int main(int argc, char *argv[]){
     ByteArray msg; 
     ByteArray key; 
     ByteArray cipher; 
 
     FILE * inputStream; /* read msg from stdin or a file */
-    FILE * keyFile = fopen("key", "w"); /* store the key */
-    FILE * cipherFile = fopen("cipher", "w"); /* store result */
+    FILE * keyFile; /* store the key */
+    FILE * cipherFile; /* store result */
 
     char msgStr[BUFFER_SIZE]; 
     size_t index;
     int c = 0;
 
-    if(argc == 1){
-        /* No command line args. 
-        User types in input or redirect from file */
+    if(argc == 3){
+        /* User types in input or redirect from file */
         inputStream = stdin;
+        keyFile = fopen(argv[1], "w");
+        cipherFile = fopen(argv[2], "w");
         printf("Press Ctrl + D on a new line (Unix) ");
         printf("or Ctrl + Z and Enter (Windows) to end input.\n\n");
     }
-    else if (argc == 2)
+    else if (argc == 4)
     {
-        /* Command line arg is name of input file */
+        /* Command line arg specifies name of input file */
         inputStream = fopen(argv[1], "r");
+        keyFile = fopen(argv[2], "w");
+        cipherFile = fopen(argv[3], "w");
+    }
+    else{
+        fprintf(stderr, "Invalid number of command-line arguments.");
+        fprintf(stderr, "\n");
+        return 1;
     }
 
     OTP_setup();

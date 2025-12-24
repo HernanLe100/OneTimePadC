@@ -1,5 +1,7 @@
 /* decrypt.c - Hernan Le */
 
+/* ./decrypt cipherFile keyFile [msgFile] */
+
 #include "byteArray.h"
 #include "oneTimePad.h"
 #include <stdio.h>
