@@ -19,8 +19,7 @@ int main(int argc, char *argv[]){
     FILE * cipherFile = fopen("cipher", "w"); /* store result */
 
     char msgStr[BUFFER_SIZE]; 
-    size_t index = 0;
-    int c = 0;
+    char *ptr; /* pointer to indicate status of input loop */
 
     if(argc == 1){
         /* No command line args. 
@@ -38,20 +37,8 @@ int main(int argc, char *argv[]){
     OTP_setup();
     
     /* continue until reach end of input */
-    while(c != EOF){
-        index = 0;
-        /* fit within array bounds */
-        while(index < BUFFER_SIZE - 1){
-            c = fgetc(inputStream);
-            if(c == EOF)
-                break;
-
-            msgStr[index] = c;
-            index ++;
-        }
-        msgStr[index] = '\0';
-
-
+    ptr = fgets(msgStr, BUFFER_SIZE, inputStream);
+    while(ptr != NULL){
         msg = OTP_stringToByteArray(msgStr);
         key = OTP_generateKey( ByteArray_len(msg) );
         OTP_print(keyFile, key);
@@ -61,6 +48,8 @@ int main(int argc, char *argv[]){
         ByteArray_free(msg);
         ByteArray_free(key);
         ByteArray_free(cipher);
+
+        ptr = fgets(msgStr, BUFFER_SIZE, inputStream);
     }
 
     if(inputStream == stdin)
