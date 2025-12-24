@@ -15,9 +15,9 @@ void OTP_setup();
 Return NULL if memory allocation failed. */
 ByteArray OTP_generateKey(size_t keyLength);
 
-/* Returns a ByteArray representation of str. 
+/* Returns a ByteArray representation of first length bytes of str. 
 Return NULL if memory allocation failed.*/
-ByteArray OTP_stringToByteArray(const char *str);
+ByteArray OTP_stringToByteArray(const char *str, size_t length);
 
 /* XOR msg and key and returns result as ByteArray. 
 Return NULL if memory allocation failed. 

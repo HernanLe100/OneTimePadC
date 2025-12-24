@@ -31,20 +31,17 @@ ByteArray OTP_generateKey(size_t keyLength){
     return key;
 }
 
-ByteArray OTP_stringToByteArray(const char *str){
+ByteArray OTP_stringToByteArray(const char *str, size_t length){
     size_t index;
-    size_t strLength; 
     ByteArray byteArr;
 
     assert(str != NULL);
 
-    strLength = strlen(str);
-
-    byteArr = ByteArray_new(strLength);
+    byteArr = ByteArray_new(length);
     if (byteArr == NULL)
         return NULL;
 
-    for(index = 0; index < strLength; index++){
+    for(index = 0; index < length; index++){
         ByteArray_setByte(byteArr, index, str[index]);
     }
 

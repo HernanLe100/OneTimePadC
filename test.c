@@ -16,13 +16,13 @@ int main(void){
     printf("\n\n");
     ByteArray_free(key);
 
-    msg = OTP_stringToByteArray("Hello World");
+    msg = OTP_stringToByteArray("Hello World", 11);
     OTP_print(stdout, msg);
     ByteArray_free(msg);
     printf("\n\n");
 
     key = OTP_generateKey(5);
-    msg = OTP_stringToByteArray("Hello World");
+    msg = OTP_stringToByteArray("Hello World", 11);
     result1 = OTP_applyKey(msg, key);
     OTP_print(stdout, result1);
     printf("\n\n");
