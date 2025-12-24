@@ -43,6 +43,8 @@ int main(int argc, char *argv[]){
     else{
         fprintf(stderr, "Invalid number of command-line arguments.");
         fprintf(stderr, "\n");
+        
+        fprintf(stderr, "Run with: ./encrypt [msgFile] keyFile cipherFile\n");
         return 1;
     }
 
