@@ -8,7 +8,7 @@
 enum{BUFFER_SIZE = 65536}; 
 
 /* Takes in cipher and key file names as command line args and prints 
-decrypted message to standard output */
+decrypted message to standard output.  */
 int main(int argc, char *argv[]){
     ByteArray cipher; 
     ByteArray key; 
@@ -66,8 +66,6 @@ int main(int argc, char *argv[]){
 
     fclose(cipherFile);
     fclose(keyFile);
-    
-    printf("\n");
 
     return 0;
 }
